@@ -1,0 +1,18 @@
+
+# Node
+node_modules/
+
+# Environment
+.env
+
+# Uploads / generated files
+uploads/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+npm-debug.log*
+
