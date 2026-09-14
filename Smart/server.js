@@ -28,6 +28,8 @@ app.use(cors({
     origin: function (origin, callback) {
         // allow requests with no origin (like mobile apps or curl)
         if (!origin) return callback(null, true);
+        // allow all origins if ALLOWED_ORIGINS contains '*'
+        if (allowedOrigins.indexOf('*') !== -1) return callback(null, true);
         if (allowedOrigins.indexOf(origin) !== -1) {
             return callback(null, true);
         }
