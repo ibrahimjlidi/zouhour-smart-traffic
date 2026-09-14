@@ -12,7 +12,8 @@
     "lucide-react": "^1.45.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^7.18.3"
+    "react-router-dom": "^7.18.3",
+    "smart-network-traffic": "file:../Smart"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.1.1",

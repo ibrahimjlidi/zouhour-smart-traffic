@@ -1,6 +1,6 @@
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useState } from 'react'
-import { Menu, X, LogOut, LayoutDashboard, Users, BookOpen, AlertCircle, FileText, HardDrive, Settings } from 'lucide-react'
+import { Menu, X, LogOut, LayoutDashboard, Users, AlertCircle, FileText, HardDrive } from 'lucide-react'
 
 export default function Layout({ user, onLogout }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
@@ -10,7 +10,6 @@ export default function Layout({ user, onLogout }) {
   const menuItems = [
     { label: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
     { label: 'Users', icon: Users, path: '/users' },
-    { label: 'Courses', icon: BookOpen, path: '/courses' },
     { label: 'Alerts', icon: AlertCircle, path: '/alerts' },
     { label: 'Reports', icon: FileText, path: '/reports' },
     { label: 'Network Files', icon: HardDrive, path: '/files' },

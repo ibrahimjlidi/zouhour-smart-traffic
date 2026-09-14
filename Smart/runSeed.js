@@ -1,7 +1,6 @@
 require('dotenv').config()
 const mongoose = require('mongoose')
 const Utilisateur = require('./models/Utilisateur')
-const Cour = require('./models/Cour')
 const Alerte = require('./models/Alerte')
 const Rapport = require('./models/rapport')
 const FichierReseau = require('./models/fichierReseau')
@@ -16,7 +15,6 @@ async function runSeed() {
 
     // Clear existing data
     await Utilisateur.deleteMany({})
-    await Cour.deleteMany({})
     await Alerte.deleteMany({})
     await Rapport.deleteMany({})
     await FichierReseau.deleteMany({})
@@ -32,9 +30,7 @@ async function runSeed() {
     await Utilisateur.insertMany(usersWithHashedPasswords)
     console.log(`✅ Inserted ${seedData.users.length} users`)
 
-    // Insert courses
-    await Cour.insertMany(seedData.courses)
-    console.log(`✅ Inserted ${seedData.courses.length} courses`)
+    // (courses removed) no course data inserted
 
     // Insert alerts
     await Alerte.insertMany(seedData.alerts)
@@ -51,7 +47,6 @@ async function runSeed() {
     console.log('\n🎉 Seed data inserted successfully!')
     console.log('\n📊 Summary:')
     console.log(`   - Users: ${seedData.users.length}`)
-    console.log(`   - Courses: ${seedData.courses.length}`)
     console.log(`   - Alerts: ${seedData.alerts.length}`)
     console.log(`   - Reports: ${seedData.reports.length}`)
     console.log(`   - Network Files: ${seedData.files.length}`)

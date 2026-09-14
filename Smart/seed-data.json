@@ -30,51 +30,7 @@
       "motDePasse": "Carlos@123",
       "role": "ResponsableReseau"
     }
-  ],
-  "courses": [
-    {
-      "titre": "Network Fundamentals",
-      "description": "Learn the basics of computer networking including OSI model, TCP/IP stack, and network protocols",
-      "niveau": "Beginner",
-      "categorie": "Networking",
-      "pdf": "https://example.com/courses/network-fundamentals.pdf"
-    },
-    {
-      "titre": "Network Security Essentials",
-      "description": "Comprehensive guide to network security including firewalls, VPNs, encryption, and intrusion detection",
-      "niveau": "Intermediate",
-      "categorie": "Security",
-      "pdf": "https://example.com/courses/network-security.pdf"
-    },
-    {
-      "titre": "Advanced Threat Analysis",
-      "description": "Deep dive into threat analysis, vulnerability assessment, and penetration testing techniques",
-      "niveau": "Advanced",
-      "categorie": "Security",
-      "pdf": "https://example.com/courses/threat-analysis.pdf"
-    },
-    {
-      "titre": "Linux System Administration",
-      "description": "Master Linux system administration, user management, service configuration, and troubleshooting",
-      "niveau": "Intermediate",
-      "categorie": "Administration",
-      "pdf": "https://example.com/courses/linux-admin.pdf"
-    },
-    {
-      "titre": "Network Monitoring & Analytics",
-      "description": "Learn to monitor network performance using tools like Wireshark, tcpdump, and Splunk",
-      "niveau": "Intermediate",
-      "categorie": "Monitoring",
-      "pdf": "https://example.com/courses/monitoring.pdf"
-    },
-    {
-      "titre": "Traffic Analysis Mastery",
-      "description": "Expert-level course on analyzing network traffic patterns and detecting anomalies",
-      "niveau": "Advanced",
-      "categorie": "Monitoring",
-      "pdf": "https://example.com/courses/traffic-analysis.pdf"
-    }
-  ],
+  
   "alerts": [
     {
       "destinataire": "ahmed.benzema@smartnet.com",

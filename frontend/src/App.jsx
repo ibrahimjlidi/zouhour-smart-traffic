@@ -6,7 +6,6 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
 import Users from './pages/Users'
-import Courses from './pages/Courses'
 import Alerts from './pages/Alerts'
 import Reports from './pages/Reports'
 import Files from './pages/Files'
@@ -74,7 +73,6 @@ function App() {
             <Route element={<Layout user={user} onLogout={handleLogout} />}>
               <Route path="/dashboard" element={<Dashboard user={user} />} />
               <Route path="/users" element={<Users />} />
-              <Route path="/courses" element={<Courses />} />
               <Route path="/alerts" element={<Alerts />} />
               <Route path="/reports" element={<Reports />} />
               <Route path="/files" element={<Files />} />

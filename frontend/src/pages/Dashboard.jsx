@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Users, BookOpen, AlertCircle, FileText, HardDrive, TrendingUp } from 'lucide-react'
+import { Users, AlertCircle, FileText, HardDrive, TrendingUp } from 'lucide-react'
 
 export default function Dashboard({ user }) {
   const [stats, setStats] = useState({
     users: 0,
-    courses: 0,
     alerts: 0,
     reports: 0,
     files: 0
@@ -19,9 +18,8 @@ export default function Dashboard({ user }) {
 
   const fetchDashboardData = async () => {
     try {
-      const [usersRes, coursesRes, alertsRes, reportsRes, filesRes] = await Promise.all([
+      const [usersRes, alertsRes, reportsRes, filesRes] = await Promise.all([
         axios.get('/api/utilisateurs').catch(() => ({ data: [] })),
-        axios.get('/api/cours').catch(() => ({ data: [] })),
         axios.get('/api/alertes').catch(() => ({ data: [] })),
         axios.get('/api/rapports').catch(() => ({ data: [] })),
         axios.get('/api/fichiers').catch(() => ({ data: [] }))
@@ -29,7 +27,6 @@ export default function Dashboard({ user }) {
 
       setStats({
         users: usersRes.data?.length || 0,
-        courses: coursesRes.data?.length || 0,
         alerts: alertsRes.data?.length || 0,
         reports: reportsRes.data?.length || 0,
         files: filesRes.data?.length || 0
@@ -81,18 +78,12 @@ export default function Dashboard({ user }) {
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
           icon={Users}
           label="Total Users"
           value={stats.users}
           color="from-blue-500 to-blue-600"
-        />
-        <StatCard
-          icon={BookOpen}
-          label="Courses"
-          value={stats.courses}
-          color="from-green-500 to-green-600"
         />
         <StatCard
           icon={AlertCircle}

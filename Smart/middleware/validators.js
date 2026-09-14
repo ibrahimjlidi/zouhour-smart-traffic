@@ -72,27 +72,6 @@ exports.validateRapport = [
 ];
 
 /**
- * COURS VALIDATORS
- */
-exports.validateCour = [
-  body('titre')
-    .trim()
-    .isLength({ min: 3, max: 200 })
-    .withMessage('Titre invalide'),
-  body('description')
-    .trim()
-    .isLength({ min: 10, max: 1000 })
-    .withMessage('Description invalide'),
-  body('niveau')
-    .isIn(['Beginner', 'Intermediate', 'Advanced'])
-    .withMessage('Niveau invalide'),
-  body('categorie')
-    .trim()
-    .notEmpty()
-    .withMessage('Catégorie requise')
-];
-
-/**
  * ERROR HANDLER MIDDLEWARE
  * Use this after validators to send error responses
  */

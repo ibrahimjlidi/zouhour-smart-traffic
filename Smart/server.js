@@ -73,7 +73,7 @@ app.use("/api/alertes",require("./routes/alerteRoutes"));
 app.use("/api/rapports",require("./routes/rapportRoutes"));
 
 // Routes cours
-app.use("/api/cours", require("./routes/courRoutes"));
+// courses feature removed to focus on network traffic management
 
 // error handler (last)
 app.use(errorHandler);
