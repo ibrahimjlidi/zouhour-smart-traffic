@@ -10,6 +10,9 @@ import Alerts from './pages/Alerts'
 import Reports from './pages/Reports'
 import Files from './pages/Files'
 
+// Set axios base URL from Vite env (VITE_API_URL) so frontend can call remote backend
+axios.defaults.baseURL = import.meta.env.VITE_API_URL || ''
+
 // Configure axios to include token in requests
 axios.interceptors.request.use((config) => {
   const token = localStorage.getItem('token')
