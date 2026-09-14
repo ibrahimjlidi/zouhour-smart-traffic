@@ -1,4 +1,11 @@
 const express = require("express");
+// Ensure `crypto` is available on the global object for environments
+// where libraries expect a browser-like `crypto` global (fixes
+// "ReferenceError: crypto is not defined" in some containers).
+if (typeof globalThis.crypto === 'undefined') {
+    // eslint-disable-next-line global-require
+    globalThis.crypto = require('crypto');
+}
 const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
