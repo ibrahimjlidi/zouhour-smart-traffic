@@ -73,9 +73,51 @@ app.use(dbReady);
 // Global error handler
 const errorHandler = require('./middleware/errorHandler');
 
-mongoose.connect(process.env.MONGO_URI)
-.then(() => console.log("MongoDB connecté avec succès "))
-.catch(err => console.log(err));
+// Resilient mongoose connection with retries and optional relaxed TLS for debugging
+async function connectWithRetry(retries = 5, delayMs = 2000) {
+    const uri = process.env.MONGO_URI;
+    if (!uri) {
+        console.error('MONGO_URI is not set. Set this env var and restart.');
+        return;
+    }
+
+    const baseOptions = {
+        serverSelectionTimeoutMS: 10000,
+        // use the driver's defaults for topology
+    };
+
+    const allowInsecure = process.env.ALLOW_TLS_INSECURE === 'true';
+    const options = Object.assign({}, baseOptions, allowInsecure ? { tlsAllowInvalidCertificates: true } : {});
+
+    for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+            console.log(`MongoDB connecting attempt ${attempt}/${retries}...`);
+            await mongoose.connect(uri, options);
+            console.log('MongoDB connecté avec succès');
+            return;
+        } catch (err) {
+            console.error(`Mongo connect attempt ${attempt} failed:`);
+            console.error(err && err.stack ? err.stack : err);
+
+            // If this was a TLS alert and insecure flag is not set, provide advice
+            const msg = String(err && (err.message || err));
+            if (msg.includes('SSL routines') || msg.includes('tls')) {
+                console.warn('Detected TLS/SSL error during Mongo connection.');
+                if (!allowInsecure) {
+                    console.warn('To temporarily bypass certificate validation for debugging, set ALLOW_TLS_INSECURE=true in your environment.');
+                }
+            }
+
+            if (attempt < retries) {
+                await new Promise(res => setTimeout(res, delayMs * attempt));
+                continue;
+            }
+            console.error('All MongoDB connection attempts failed. The app will continue running but DB operations will return 503 until a connection is established.');
+        }
+    }
+}
+
+connectWithRetry().catch(err => console.error('Unhandled error during initial Mongo connect:', err));
 
 mongoose.connection.on('error', (err) => console.error('Mongo connection error', err));
 mongoose.connection.on('disconnected', () => console.warn('Mongo disconnected'));
