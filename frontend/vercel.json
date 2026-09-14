@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:match*",
-      "destination": "https://<YOUR_BACKEND_DOMAIN>/api/:match*"
+      "destination": "https://zouhour-smart-traffic.onrender.com/api/:match*"
     }
   ]
 }

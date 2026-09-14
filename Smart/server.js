@@ -28,11 +28,25 @@ app.use(cors({
     origin: function (origin, callback) {
         // allow requests with no origin (like mobile apps or curl)
         if (!origin) return callback(null, true);
+
+        // Normalize origin and allowedOrigins for comparison
+        const normalizedOrigin = origin.replace(/\/$/, '');
+        const normalizedAllowed = allowedOrigins.map(o => o.replace(/\/$/, ''));
+
+        // debug log to help diagnose CORS issues in production
+        if (process.env.DEBUG_CORS === 'true') {
+            console.log('CORS check — origin:', origin);
+            console.log('CORS check — allowedOrigins:', normalizedAllowed);
+        }
+
         // allow all origins if ALLOWED_ORIGINS contains '*'
-        if (allowedOrigins.indexOf('*') !== -1) return callback(null, true);
-        if (allowedOrigins.indexOf(origin) !== -1) {
+        if (normalizedAllowed.indexOf('*') !== -1) return callback(null, true);
+
+        if (normalizedAllowed.indexOf(normalizedOrigin) !== -1) {
             return callback(null, true);
         }
+
+        console.warn('CORS rejection — origin not allowed:', origin);
         return callback(new Error('Not allowed by CORS'));
     },
     credentials: true,
